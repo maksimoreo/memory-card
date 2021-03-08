@@ -1,11 +1,12 @@
 import './styles/App.css';
+import Game from './components/Game';
 
 function App() {
-  return (
-    <div className="App">
-        <h1>hello</h1>
-    </div>
-  );
+    return (
+        <div className="App">
+            <Game numberOfCards={10} />
+        </div>
+    );
 }
 
 export default App;
