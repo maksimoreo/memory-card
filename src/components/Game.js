@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import _ from 'lodash';
 import Card from './Card';
+import '../styles/Game.css'
 
 export default function Game(props) {
     const [score, setScore] = useState(0);
@@ -29,10 +30,9 @@ export default function Game(props) {
 
     return (
         <div>
-            <h1>Memory Game</h1>
-            <p>Score: {score}</p>
-            <p>Highscore: {highscore}</p>
-            <div>
+            <p className="score-text">Score: {score}</p>
+            <p className="highscore-text">Highscore: {highscore}</p>
+            <div className="cards-container">
                 {cards.map((cardID) => (
                     <Card key={cardID} id={cardID} onClick={handleCardClick} />
                 ))}

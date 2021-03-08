@@ -1,0 +1,18 @@
+.cards-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.score-text {
+    text-align: center;
+    font-size: 32px;
+}
+
+.highscore-text {
+    text-align: center;
+    font-size: 20px;
+    margin-bottom: 20px;
+    color: #777;
+    font-weight: bold;
+}
