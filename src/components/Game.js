@@ -1,13 +1,23 @@
 import { useState } from 'react';
 import _ from 'lodash';
 import Card from './Card';
-import '../styles/Game.css'
+import '../styles/Game.css';
+
+function generateIds(numberOfCards) {
+    const maxId = Math.pow(2, Math.ceil(Math.log2(numberOfCards)));
+    return _.shuffle(_.range(0, maxId)).slice(0, numberOfCards);
+}
 
 export default function Game(props) {
     const [score, setScore] = useState(0);
     const [highscore, setHighscore] = useState(0);
-    const [cards, setCards] = useState(_.shuffle(_.range(props.numberOfCards)));
+    const [cards, setCards] = useState(generateIds(props.numberOfCards));
     const [clickedCards, setClickedCards] = useState([]);
+
+    const restart = () => {
+        setScore(0);
+        setCards(generateIds(props.numberOfCards));
+    };
 
     const handleCardClick = (id) => {
         if (clickedCards.includes(id)) {
@@ -16,12 +26,14 @@ export default function Game(props) {
             setClickedCards([]);
 
             // TODO: Lose
+            restart();
         } else {
             setClickedCards(clickedCards.concat(id));
             setScore(score + 1);
 
             if (clickedCards.length === cards.length) {
                 // TODO: Win
+                restart();
             }
         }
 
@@ -34,7 +46,12 @@ export default function Game(props) {
             <p className="highscore-text">Highscore: {highscore}</p>
             <div className="cards-container">
                 {cards.map((cardID) => (
-                    <Card key={cardID} id={cardID} onClick={handleCardClick} />
+                    <Card
+                        key={cardID}
+                        id={cardID}
+                        maxId={props.numberOfCards - 1}
+                        onClick={handleCardClick}
+                    />
                 ))}
             </div>
         </div>
